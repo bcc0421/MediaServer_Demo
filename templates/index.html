@@ -103,8 +103,8 @@
             <script type='text/javascript'>
                 jwplayer('mediaspace').setup({
                     'flashplayer': '/static/swf/player.swf',
-                    'file': 'toystory3.flv',
-                    'streamer': 'rtmp://localhost/oflaDemo',
+                    'file': '{{ media_file }}',
+                    'streamer': '{{ rtmp_path }}',
                     'controlbar': 'bottom',
                     'width': '848',
                     'height': '360'
