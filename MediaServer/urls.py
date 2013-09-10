@@ -3,17 +3,10 @@ from django.conf.urls import patterns, include, url
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
-from MS.views import index
+from MS.views import remove_file, file_upload, index
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'MediaServer.views.home', name='home'),
-    # url(r'^MediaServer/', include('MediaServer.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', index),
+                       url(r'^$', index),
+                       url(r'^remove_file/$', remove_file),
+                       url(r'^file_upload/$', file_upload)
 )
