@@ -23,7 +23,7 @@ def index(request, file_name=None):
 @api_view(['POST'])
 @parser_classes((FileUploadParser,))
 def file_upload(request):
-    file = request.FILES.get('fileUpload', None)
+    file = request.FILES.get('file', None)
     if file:
         # TODO: Streaming Video (FLV, F4V, MP4, 3GP) Streaming Audio (MP3, F4A, M4A, AAC)
         file_name = ''
@@ -41,11 +41,12 @@ def file_upload(request):
             temp_file = TempFile(name=file_name, path=file_path)
             temp_file.save()
             return Response({
-                'file name': file_name
+                'file_name': file_name
             })
-    return Response({
-        'received data': request.DATA
-    })
+        else:
+            return Response({
+                'status': 'Current just suppoed .mp4 && .flv.'
+            })
 
 
 @api_view(['DELETE'])
