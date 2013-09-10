@@ -45,7 +45,7 @@ def file_upload(request):
             })
         else:
             return Response({
-                'status': 'Current just suppoed .mp4 && .flv.'
+                'status': 'Current just support .mp4 && .flv.'
             })
 
 
