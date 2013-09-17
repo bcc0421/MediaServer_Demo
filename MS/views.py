@@ -6,8 +6,9 @@ from rest_framework.response import Response
 from MS.models import TempFile
 import uuid, os
 
-FILE_PATH = '/home/robin/Documents/red5-1.0.0/webapps/oflaDemo/streams/'
+FILE_PATH = '/root/red5-1.0.0/webapps/oflaDemo/streams/'
 RTMP_PATH = 'rtmp://localhost/oflaDemo'
+JAR_PATH = os.path.join(os.path.dirname(__file__), '..', 'jar/').replace('\\', '/')
 
 
 def index(request, file_name=None):

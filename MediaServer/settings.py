@@ -1,24 +1,17 @@
 # Django settings for MediaServer project.
 import os
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-# ('Your Name', 'your_email@example.com'),
+    ('Robin', 'bcc0421@gmail.com'),
 )
 
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.',
-        # 'NAME': '',
-        # 'USER': '',
-        # 'PASSWORD': '',
-        # 'HOST': '',
-        # 'PORT': '',
-
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'MediaServer_Demo',
         'USER': 'root',
