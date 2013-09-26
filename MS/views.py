@@ -1,12 +1,15 @@
 # Create your views here.
+import uuid
+import os
+
 from django.shortcuts import render_to_response
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import FileUploadParser, JSONParser
 from rest_framework.response import Response
 from MS.models import TempFile
-import uuid, os
 
-FILE_PATH = '/root/red5-1.0.0/webapps/oflaDemo/streams/'
+
+FILE_PATH = '/home/robin/Documents/red5-1.0.0/webapps/oflaDemo/streams/'
 RTMP_PATH = 'rtmp://localhost/oflaDemo'
 JAR_PATH = os.path.join(os.path.dirname(__file__), '..', 'jar/').replace('\\', '/')
 
@@ -25,12 +28,13 @@ def index(request, file_name=None):
 @parser_classes((FileUploadParser,))
 def file_upload(request):
     file = request.FILES.get('file', None)
+    type = request.DATA.get('type', None)
     if file:
         # TODO: Streaming Video (FLV, F4V, MP4, 3GP) Streaming Audio (MP3, F4A, M4A, AAC)
         file_name = ''
-        if file.content_type == u'video/x-flv':
+        if type == u'video/x-flv':
             file_name = str(uuid.uuid1()) + '.flv'
-        elif file.content_type == u'video/mp4':
+        elif type == u'video/mp4':
             file_name = str(uuid.uuid1()) + '.mp4'
 
         if file_name != '':
