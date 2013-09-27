@@ -9,16 +9,17 @@ from rest_framework.response import Response
 from django.http import HttpResponse
 from django.core.servers.basehttp import FileWrapper
 from django.http import Http404
+
 from MS.models import TempFile
 
 
-FILE_PATH = '/home/robin/Documents/red5-1.0.0/webapps/oflaDemo/streams/'
+FILE_PATH = '/root/red5-1.0.0/webapps/oflaDemo/streams/'
 RTMP_PATH = 'rtmp://192.168.1.165/oflaDemo'
 JAR_PATH = os.path.join(os.path.dirname(__file__), '..', 'jar/').replace('\\', '/')
 
 
 def index(request, file_name=None):
-    media_file = '71834244-24f8-11e3-9126-000c29fb62b6.mp4'
+    media_file = 'toystory3.flv'
     if file_name:
         media_file = file_name
     return render_to_response('index.html', {
@@ -85,8 +86,8 @@ def attachment(request, file_name=None):
             content_type = 'video/x-flv'
         elif file_type == u'mp4':
             content_type = 'video/mp4'
-        file = FileWrapper(open(file_path, 'rb'))
-        response = HttpResponse(file, content_type=content_type)
+        media_file = FileWrapper(open(file_path, 'rb'))
+        response = HttpResponse(media_file, content_type=content_type)
         response['Content-Disposition'] = 'attachment; filename=%s' % file_name
         return response
     else:
