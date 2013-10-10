@@ -32,12 +32,13 @@ def index(request, file_name=None):
 @parser_classes((FileUploadParser,))
 def file_upload(request):
     file = request.FILES.get('file', None)
+    type = request.DATA.get('type', None)
     if file:
         # TODO: Streaming Video (FLV, F4V, MP4, 3GP) Streaming Audio (MP3, F4A, M4A, AAC)
         file_name = ''
-        if file.content_type == u'video/x-flv':
+        if type == u'video/x-flv':
             file_name = str(uuid.uuid1()) + '.flv'
-        elif file.content_type == u'video/mp4':
+        elif type == u'video/mp4':
             file_name = str(uuid.uuid1()) + '.mp4'
 
         if file_name != '':
