@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from django.http import HttpResponse
 from django.core.servers.basehttp import FileWrapper
 from django.http import Http404
+from converter import Converter
 
 from MS.models import TempFile
 
@@ -36,21 +37,28 @@ def file_upload(request):
     if file:
         # TODO: Streaming Video (FLV, F4V, MP4, 3GP) Streaming Audio (MP3, F4A, M4A, AAC)
         file_name = ''
+        thumbnail = ''
+        convert = Converter()
         if type == u'video/x-flv':
-            file_name = str(uuid.uuid1()) + '.flv'
+            uuid_string = str(uuid.uuid1())
+            file_name = uuid_string + '.flv'
+            thumbnail = uuid_string + '.jpg'
         elif type == u'video/mp4':
-            file_name = str(uuid.uuid1()) + '.mp4'
-
+            uuid_string = str(uuid.uuid1())
+            file_name = uuid_string + '.mp4'
+            thumbnail = uuid_string + '.jpg'
         if file_name != '':
             file_path = FILE_PATH + file_name
             with open(file_path, 'wb+') as destination:
                 for chunk in file.chunks():
                     destination.write(chunk)
                 destination.close()
+                convert.thumbnail(file_path, 10, FILE_PATH + thumbnail)
             temp_file = TempFile(name=file_name, path=file_path)
             temp_file.save()
             return Response({
-                'file_name': file_name
+                'file_name': file_name,
+                'thumbnail': thumbnail
             })
         else:
             return Response({
