@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 
-from MS.views import remove_file, file_upload, index, attachment
+from MS.views import remove_file, file_upload, index, attachment, thumbnail
 
 urlpatterns = patterns('',
                        url(r'^$', index),
