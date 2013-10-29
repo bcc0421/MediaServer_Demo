@@ -1,4 +1,5 @@
 # Create your views here.
+from Tkinter import Image
 import uuid
 import os
 
@@ -101,3 +102,14 @@ def attachment(request, file_name=None):
         return response
     else:
         return Http404
+
+
+@api_view(['GET'])
+def thumbnail(request, name=None):
+    if name is not None:
+        file_path = FILE_PATH + name
+        try:
+            with open(file_path, "rb") as f:
+                return HttpResponse(f.read(), mimetype="image/jpeg")
+        except IOError:
+            return Http404

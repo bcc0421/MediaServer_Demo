@@ -7,5 +7,6 @@ urlpatterns = patterns('',
                        url(r'^remove_file/$', remove_file),
                        url(r'^file_upload/$', file_upload),
                        url(r'^attachment/(?P<file_name>.+)/$', attachment),
+                       url(r'^thumbnail/(?P<name>.+)/$', thumbnail),
                        url(r'^play/(?P<file_name>.+)/$', index),
 )
