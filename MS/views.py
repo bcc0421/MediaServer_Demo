@@ -112,7 +112,7 @@ def thumbnail(request, name=None):
             with open(file_path, "rb") as f:
                 return HttpResponse(f.read(), mimetype="image/jpeg")
         except IOError:
-            red = Image.new('RGBA', (200, 200), (255, 0, 0, 0))
+            red = Image.new('RGBA', (500, 500), (255, 0, 0, 0))
             response = HttpResponse(mimetype="image/jpeg")
             red.save(response, "JPEG")
             return response
