@@ -1,8 +1,8 @@
 # Create your views here.
-from Tkinter import Image
 import uuid
 import os
 
+from PIL import Image
 from django.shortcuts import render_to_response
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import FileUploadParser, JSONParser
@@ -112,4 +112,7 @@ def thumbnail(request, name=None):
             with open(file_path, "rb") as f:
                 return HttpResponse(f.read(), mimetype="image/jpeg")
         except IOError:
-            return Http404
+            red = Image.new('RGBA', (200, 200), (255, 0, 0, 0))
+            response = HttpResponse(mimetype="image/jpeg")
+            red.save(response, "JPEG")
+            return response
